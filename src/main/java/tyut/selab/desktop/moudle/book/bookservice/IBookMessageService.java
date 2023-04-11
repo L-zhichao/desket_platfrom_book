@@ -13,12 +13,18 @@ public interface IBookMessageService {
     List<BookBorrowVo> queryBorrowBookLog();
 
     /**
-     * 根据书名/书的拥有者学号来查询借书记录
-     * @param bookBorrow
+     * 根据书名来查询借书记录
+     * @param bookName
      * @return
      */
-    List<BookBorrowVo> queryBorrowBookLog(BookBorrowVo bookBorrow);
+    List<BookBorrowVo> queryBorrowBookLog(String bookName);
 
+    /**
+     * 根据学号来查询借书记录
+     * @param userStudentNumber
+     * @return
+     */
+    List<BookBorrowVo> queryBorrowBookLog(Integer userStudentNumber);
     /**
      * 查询全部图书
      * @return 图书列表

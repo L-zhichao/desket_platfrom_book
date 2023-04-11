@@ -13,7 +13,7 @@ public interface IBookBorrowService {
      * @param book
      * @return 借书的信息
      */
-    BookBorrowVo borrowBook(BookVo book);
+    BookBorrowVo borrowBook(BookBorrowVo book);
 
     /**
      * 还书

@@ -22,14 +22,14 @@ public interface IBookMessageDao {
      * @param bookBorrow
      * @return
      */
-    List<BookBorrow> queryBorrowBookLog(String bookName);
+    List<BookBorrow> queryBorrowBookByName(String bookName);
 
     /**
      * 根据书的拥有者学号来查询借书记录
      * @param studentNumber
      * @return
      */
-    List<BookBorrow> queryBorrowBookLog(Integer studentNumber);
+    List<BookBorrow> queryBorrowBookByUserid(Integer studentNumber);
 
     /**
      * 查询全部图书

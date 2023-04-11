@@ -19,9 +19,15 @@ public class BookMessageService implements IBookMessageService {
     }
 
     @Override
-    public List<BookBorrowVo> queryBorrowBookLog(BookBorrowVo bookBorrow) {
+    public List<BookBorrowVo> queryBorrowBookLog(String bookName) {
         return null;
     }
+
+    @Override
+    public List<BookBorrowVo> queryBorrowBookLog(Integer userStudentNumber) {
+        return null;
+    }
+
 
     @Override
     public List<BookVo> queryAllBook() {

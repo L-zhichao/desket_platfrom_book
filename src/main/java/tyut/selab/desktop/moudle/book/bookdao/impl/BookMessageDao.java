@@ -8,17 +8,22 @@ import java.util.List;
 
 public class BookMessageDao implements IBookMessageDao{
     @Override
+    public Book queryBookById(int bookId) {
+        return null;
+    }
+
+    @Override
     public List<BookBorrow> queryBorrowBookLog() {
         return null;
     }
 
    @Override
-    public List<BookBorrow> queryBorrowBookLog(String bookName)  {
+    public List<BookBorrow> queryBorrowBookByName(String bookName)  {
         return null;
     }
 
     @Override
-    public List<BookBorrow> queryBorrowBookLog(Integer studentNumber) {
+    public List<BookBorrow> queryBorrowBookByUserid(Integer studentNumber) {
         return null;
     }
 
