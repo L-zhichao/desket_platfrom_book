@@ -16,7 +16,7 @@ public class book_GetConnection {
       }
        int rows = preparedStatement.executeUpdate();
       preparedStatement.close();
-      MysqlConnect.freeConnection();
+      MysqlConnect.closeConnection();
        return rows;
    }
    public <T> List<T> executeQuery(Class<T> clazz,String sql,Object...params) throws SQLException, InstantiationException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
