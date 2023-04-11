@@ -9,14 +9,28 @@ public interface IBookBorrowController {
     /**
      * 借书
      * @param book
-     * @return 成功返回1,失败返回-1
+     * @return 借书的信息
      */
-    BookBorrowVo borrowBook(BookVo book);
+    BookVo borrowBook(BookVo book);
 
     /**
      * 还书
      * @param book
-     * @return 成功返回1,失败返回-1
+     * @return
      */
-    BookVo returnBook(BookBorrowVo book) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+    BookVo returnBook(BookVo book);
+
+    /**
+     * 更新书籍还书时间
+     * @param returnTime
+     * @param bookVo
+     * @return
+     */
+    int updateBookReturnTime(Data returnTime, BookVo bookVo);
+
+    /**
+     * 逾期还书黑名单
+     * @return
+     */
+    List<UserVo> exceedReturnTimeList();
 }

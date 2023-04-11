@@ -9,9 +9,13 @@ import java.util.List;
 
 public interface IBookMessageDao {
     /**
-     * 通过书籍id查找书籍
+     * 查询指定书籍
+     * @param userStudentNumber
+     * @param bookName
+     * @return
      */
-    Book queryBookById(int bookId) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+    Book queryAsBook(Integer userStudentNumber,String bookName);
+
     /**
      * 查询借书记录
      * @return
@@ -20,19 +24,19 @@ public interface IBookMessageDao {
 
     /**
      * 根据书名来查询借书记录
-     * @param bookBorrow
+     * @param bookName
      * @return
      */
-    List<BookBorrow> queryBorrowBookByName(String bookName) throws SQLException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException;
+    List<BookBorrow> queryBorrowBookLog(String bookName) throws SQLException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException;
 
     /**
      * 根据书的拥有者学号来查询借书记录
      * @param studentNumber
      * @return
      */
-    List<BookBorrow> queryBorrowBookByUserid(Integer studentNumber) throws SQLException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException;
+    List<BookBorrow> queryBorrowBookLog(Integer studentNumber);
 
-   /**
+    /**
      * 查询全部图书
      * @return 图书列表
      */
@@ -50,27 +54,22 @@ public interface IBookMessageDao {
      * @param userStudentNumber 用户学号
      * @return 图书列表
      */
-    List<Book> queryBookByUserid(Integer userStudentNumber) throws SQLException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException;
-
-    /**
-     * 通过书籍名称和用户ID查询指定书籍
-     * @return
-     */
-    Book queryAsBook(Integer userStudentNumber,String bookName) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+    List<Book> queryBookByUserid(Integer userStudentNumber);
 
     /**
      * 增加图书
      * @param book 书
      * @return 成功返回1，失败返回-1
      */
-    int insertBook(Book book) throws SQLException;
+    int insertBook(Book book);
 
     /**
      * 修改图书信息
-     * @param book 更新
+     * @param newBook
+     * @param oldBook
      * @return
      */
-    int updateBook(Book book) throws SQLException;
+    int updateBook(Book newBook,Book oldBook);
 
     /**
      * 通过书名，修改图书状态

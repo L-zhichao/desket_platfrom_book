@@ -50,8 +50,8 @@ public class BookMessageService implements IBookMessageService {
         return bookBorrowVos;
     }
 
-    @Override
-    public List<BookBorrowVo> queryBorrowBookByName(String bookName) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+    public List<BookBorrowVo> queryBorrowBookLog(String bookName) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         List<BookBorrow> bookBorrows = bookMessageDao.queryBorrowBookByName(bookName);
         List<BookBorrowVo> bookBorrowVos = new ArrayList<>();
         for (int i = 0; i < bookBorrows.size(); i++) {
@@ -60,10 +60,9 @@ public class BookMessageService implements IBookMessageService {
             bookBorrowVos.add(bookBorrowVo);
         }
         return bookBorrowVos;
-    }
 
     @Override
-    public List<BookBorrowVo> queryBorrowBookByUserid(Integer userStudentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public List<BookBorrowVo> queryBorrowBookLog(Integer userStudentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         List<BookBorrowVo> bookBorrowVos = new ArrayList<>();
         BookMessageService bookMessageService = new BookMessageService();
         List<BookBorrow> bookBorrows = bookMessageDao.queryBorrowBookByUserid(userStudentNumber);
@@ -74,88 +73,90 @@ public class BookMessageService implements IBookMessageService {
         return bookBorrowVos;
     }
 
-    @Override
-    public List<BookVo> queryAllBook() throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        List<Book> books = bookMessageDao.queryAllBook();
-        List<BookVo> bookVos = new ArrayList<>();
-        for (int i = 0; i < books.size(); i++) {
-            Integer userStudentNumber = books.get(i).getUserStudentNumber();
-            User user = userDao.queryUserByStudentNumber(userStudentNumber);
-            UserVo userVo = userChangeUserVo(user);
-            BookVo bookVo = new BookVo();
-            bookVo.setBookUserVo(userVo);
-            bookVo.setBookName(books.get(i).getBookName());
-            bookVo.setBookStatus(books.get(i).getBookStatus());
-            bookVo.setBookPrice(books.get(i).getBookPrice());
-            bookVos.add(bookVo);
+        @Override
+        public List<BookVo> queryAllBook() throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+            List<Book> books = bookMessageDao.queryAllBook();
+            List<BookVo> bookVos = new ArrayList<>();
+            for (int i = 0; i < books.size(); i++) {
+                Integer userStudentNumber = books.get(i).getUserStudentNumber();
+                User user = userDao.queryUserByStudentNumber(userStudentNumber);
+                UserVo userVo = userChangeUserVo(user);
+                BookVo bookVo = new BookVo();
+                bookVo.setBookUserVo(userVo);
+                bookVo.setBookName(books.get(i).getBookName());
+                bookVo.setBookStatus(books.get(i).getBookStatus());
+                bookVo.setBookPrice(books.get(i).getBookPrice());
+                bookVos.add(bookVo);
+            }
+            return bookVos;
         }
-        return bookVos;
-    }
 
     @Override
-    public List<BookVo> queryBookByBookName(String bookName) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        List<Book> books = bookMessageDao.queryBookByBookName(bookName);
-        List<BookVo> bookVos = new ArrayList<>();
-        for (int i = 0; i < books.size(); i++) {
-            Integer userStudentNumber = books.get(i).getUserStudentNumber();
-            User user = userDao.queryUserByStudentNumber(userStudentNumber);
-            UserVo userVo = userChangeUserVo(user);
-            BookVo bookVo = new BookVo();
-            bookVo.setBookUserVo(userVo);
-            bookVo.setBookName(books.get(i).getBookName());
-            bookVo.setBookStatus(books.get(i).getBookStatus());
-            bookVo.setBookPrice(books.get(i).getBookPrice());
-            bookVos.add(bookVo);
+        public List<BookVo> queryBookByBookName(String bookName) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+            List<Book> books = bookMessageDao.queryBookByBookName(bookName);
+            List<BookVo> bookVos = new ArrayList<>();
+            for (int i = 0; i < books.size(); i++) {
+                Integer userStudentNumber = books.get(i).getUserStudentNumber();
+                User user = userDao.queryUserByStudentNumber(userStudentNumber);
+                UserVo userVo = userChangeUserVo(user);
+                BookVo bookVo = new BookVo();
+                bookVo.setBookUserVo(userVo);
+                bookVo.setBookName(books.get(i).getBookName());
+                bookVo.setBookStatus(books.get(i).getBookStatus());
+                bookVo.setBookPrice(books.get(i).getBookPrice());
+                bookVos.add(bookVo);
+            }
+            return bookVos;
         }
-        return bookVos;
-    }
 
     @Override
-    public List<BookVo> queryBookByUserid(Integer userStudentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        List<Book> books = bookMessageDao.queryBookByUserid(userStudentNumber);
-        List<BookVo> bookVos = new ArrayList<>();
-        for (int i = 0; i < books.size(); i++) {
-            Integer userStudentNumber1 = books.get(i).getUserStudentNumber();
-            User user = userDao.queryUserByStudentNumber(userStudentNumber1);
-            UserVo userVo = userChangeUserVo(user);
-            BookVo bookVo  = new BookVo();
-            bookVo.setBookUserVo(userVo);
-            bookVo.setBookName(books.get(i).getBookName());
-            bookVo.setBookStatus(books.get(i).getBookStatus());
-            bookVo.setBookPrice(books.get(i).getBookPrice());
-            bookVos.add(bookVo);
+        public List<BookVo> queryBookByUserid(Integer userStudentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+            List<Book> books = bookMessageDao.queryBookByUserid(userStudentNumber);
+            List<BookVo> bookVos = new ArrayList<>();
+            for (int i = 0; i < books.size(); i++) {
+                Integer userStudentNumber1 = books.get(i).getUserStudentNumber();
+                User user = userDao.queryUserByStudentNumber(userStudentNumber1);
+                UserVo userVo = userChangeUserVo(user);
+                BookVo bookVo  = new BookVo();
+                bookVo.setBookUserVo(userVo);
+                bookVo.setBookName(books.get(i).getBookName());
+                bookVo.setBookStatus(books.get(i).getBookStatus());
+                bookVo.setBookPrice(books.get(i).getBookPrice());
+                bookVos.add(bookVo);
+            }
+            return bookVos;
         }
-        return bookVos;
-    }
 
     @Override
-    public int insertBook(BookVo book) throws SQLException {
-        Book newBook = new Book();
-        newBook.setBookName(book.getBookName());
-        newBook.setBookStatus(book.getBookStatus());
-        newBook.setBookPrice(book.getBookPrice());
-        newBook.setUserStudentNumber(book.getBookUserVo().getStudentNumber());
-        int flag = bookMessageDao.insertBook(newBook);
-       return flag;
-    }
+        public int insertBook(BookVo book) throws SQLException {
+            Book newBook = new Book();
+            newBook.setBookName(book.getBookName());
+            newBook.setBookStatus(book.getBookStatus());
+            newBook.setBookPrice(book.getBookPrice());
+            newBook.setUserStudentNumber(book.getBookUserVo().getStudentNumber());
+            int flag = bookMessageDao.insertBook(newBook);
+            return flag;
+        }
 
     @Override
-    public int updateBook(BookVo book) throws SQLException {
-        Book newBook = new Book();
-        newBook.setBookName(book.getBookName());
-        newBook.setBookStatus(book.getBookStatus());
-        newBook.setBookPrice(book.getBookPrice());
-        newBook.setUserStudentNumber(book.getBookUserVo().getStudentNumber());
-        int flag = bookMessageDao.updateBook(newBook);
-        return flag;
-    }
+        public int updateBook(BookVo book) throws SQLException {
+            Book newBook = new Book();
+            newBook.setBookName(book.getBookName());
+            newBook.setBookStatus(book.getBookStatus());
+            newBook.setBookPrice(book.getBookPrice());
+            newBook.setUserStudentNumber(book.getBookUserVo().getStudentNumber());
+            int flag = bookMessageDao.updateBook(newBook);
+            return flag;
+        }
 
-    @Override
-    public int deleteBook(Integer userStudentNumber, String bookName) throws SQLException {
-        int flag = bookMessageDao.deleteBook(userStudentNumber, bookName);
-        return flag;
-    }
-    public UserVo userChangeUserVo(User user){
+
+        @Override
+        public int deleteBook(Integer userStudentNumber, String bookName) throws SQLException {
+            int flag = bookMessageDao.deleteBook(userStudentNumber, bookName);
+            return flag;
+        }
+
+        public UserVo userChangeUserVo(User user){
             UserVo userVo = new UserVo();
             userVo.setStudentNumber(user.getStudentNumber());
             userVo.setName(user.getName());
@@ -165,24 +166,24 @@ public class BookMessageService implements IBookMessageService {
             userVo.setPost(user.getPost());
             String duty = userDao.queryIdRole(user.getRoleId());
             userVo.setDuty(duty);
-        return userVo;
-    }
-    public BookBorrowVo bookBorrowChangeBookBorrowVo(BookBorrow bookBorrow) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        BookBorrowVo bookBorrowVo = new BookBorrowVo();
-        Integer userStudentNumber = bookBorrow.getUserStudentNumber();
-        User userUser = userDao.queryUserByStudentNumber(userStudentNumber);
-        UserVo userVo = userChangeUserVo(userUser);
-        bookBorrowVo.setBookUserVo(userVo);
-        Integer borrowUserStudentNumber = bookBorrow.getBorrowUserStudentNumber();
-        User userBorrow = userDao.queryUserByStudentNumber(borrowUserStudentNumber);
-        UserVo userVo1 = userChangeUserVo(userBorrow);
-        bookBorrowVo.setBorrowBookUserVo(userVo1);
-        Book book = bookMessageDao.queryBookById(bookBorrow.getBookId());
-        bookBorrowVo.setBookName(book.getBookName());
-        bookBorrowVo.setBookStatus(book.getBookStatus());
-        bookBorrowVo.setBookPrice(book.getBookPrice());
-        bookBorrowVo.setBorrowBookTime(bookBorrow.getBorrowBookTime());
-        bookBorrowVo.setReturnBookTime(bookBorrow.getReturnBookTime());
-        return bookBorrowVo;
-    }
+            return userVo;
+        }
+        public BookBorrowVo bookBorrowChangeBookBorrowVo(BookBorrow bookBorrow) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+            BookBorrowVo bookBorrowVo = new BookBorrowVo();
+            Integer userStudentNumber = bookBorrow.getUserStudentNumber();
+            User userUser = userDao.queryUserByStudentNumber(userStudentNumber);
+            UserVo userVo = userChangeUserVo(userUser);
+            bookBorrowVo.setBookUserVo(userVo);
+            Integer borrowUserStudentNumber = bookBorrow.getBorrowUserStudentNumber();
+            User userBorrow = userDao.queryUserByStudentNumber(borrowUserStudentNumber);
+            UserVo userVo1 = userChangeUserVo(userBorrow);
+            bookBorrowVo.setBorrowBookUserVo(userVo1);
+            Book book = bookMessageDao.queryBookById(bookBorrow.getBookId());
+            bookBorrowVo.setBookName(book.getBookName());
+            bookBorrowVo.setBookStatus(book.getBookStatus());
+            bookBorrowVo.setBookPrice(book.getBookPrice());
+            bookBorrowVo.setBorrowBookTime(bookBorrow.getBorrowBookTime());
+            bookBorrowVo.setReturnBookTime(bookBorrow.getReturnBookTime());
+            return bookBorrowVo;
+        }
 }

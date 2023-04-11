@@ -3,29 +3,40 @@ package tyut.selab.desktop.moudle.book.bookservice;
 import tyut.selab.desktop.moudle.book.domain.vo.BookBorrowVo;
 import tyut.selab.desktop.moudle.book.domain.vo.BookVo;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface IBookMessageService {
     /**
      * 查询借书记录
      * @return
+     * 管理员
      */
-    List<BookBorrowVo> queryBorrowBookLog() throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+    List<BookVo> queryBorrowBookLog();
 
     /**
-     * 根据书名来查询名借书记录
+     * 查询某本书的借书记录
      * @param bookName
-     * @return
-     */
-    List<BookBorrowVo> queryBorrowBookByName(String bookName) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
-
-    /**
-     * 根据拥有者学号来查询名借书记录
      * @param userStudentNumber
      * @return
+     * 管理员
      */
-    List<BookBorrowVo> queryBorrowBookByUserid(Integer userStudentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+    BookVo queryBorrowBookLog(String bookName,Integer userStudentNumber);
+
+    /**
+     * 根据书名来查询借书记录
+     * @param bookName
+     * @return
+     * 管理员
+     */
+    List<BookVo> queryBorrowBookLog(String bookName);
+
+    /**
+     * 根据学号来查询借书记录
+     * @param studentNumber
+     * @return
+     * 管理员
+     */
+    List<BookVo> queryBorrowBookLog(Integer studentNumber);
 
     /**
      * 查询全部图书

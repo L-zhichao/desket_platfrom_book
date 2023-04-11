@@ -7,6 +7,14 @@ import java.util.List;
 
 public interface IUserDao {
     /**
+     * 通过账号,密码查询用户
+     * @param accountNumber
+     * @param password
+     * @return
+     */
+    User queryUserByAccount(String accountNumber,String password);
+
+    /**
      * 查询全部用户(包括角色)
      * @return
      */
@@ -53,12 +61,13 @@ public interface IUserDao {
      * @return
      */
     List<Role> queryAllRole();
-
+    
     /**
      *  通过Id查询指定职责
+     *@return
      */
     String  queryIdRole(Integer roleId);
-
+    
     /**
      * 增加职责
      * @param role
