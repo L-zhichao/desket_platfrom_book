@@ -28,7 +28,7 @@ public class BookMessageDao implements IBookMessageDao{
     }
 
     @Override
-    public List<BookBorrow> queryBorrowBookLog(String bookName) throws SQLException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
+    public List<BookBorrow> queryBorrowBookByName(String bookName) throws SQLException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
         List<Book> books = bookMessageDao.queryBookByBookName(bookName);
         List<BookBorrow> bookBorrows = new ArrayList<>();
         for (int i = 0; i < books.size(); i++) {
@@ -40,7 +40,7 @@ public class BookMessageDao implements IBookMessageDao{
     }
 
     @Override
-    public List<BookBorrow> queryBorrowBookLog(Integer studentNumber) throws SQLException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
+    public List<BookBorrow> queryBorrowBookByUserid(Integer studentNumber) throws SQLException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
         List<Book> books = bookMessageDao.queryBookByUserid(studentNumber);
         List<BookBorrow> bookBorrows = new ArrayList<>();
         for (int i = 0; i < books.size(); i++) {

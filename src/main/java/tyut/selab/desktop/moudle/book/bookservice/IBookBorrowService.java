@@ -14,12 +14,12 @@ public interface IBookBorrowService {
      * @param book
      * @return 借书的信息
      */
-    BookBorrowVo borrowBook(BookVo book) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+    BookBorrowVo borrowBook(BookBorrowVo book) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
     /**
      * 还书
      * @param book
      * @return
      */
-    BookVo returnBook(BookBorrowVo book);
+    BookVo returnBook(BookBorrowVo book) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 }

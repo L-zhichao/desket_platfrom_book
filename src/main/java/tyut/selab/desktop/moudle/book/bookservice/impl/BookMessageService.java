@@ -23,6 +23,7 @@ import java.util.List;
 public class BookMessageService implements IBookMessageService {
     private IBookMessageDao bookMessageDao = new BookMessageDao();
    private IBookBorrowDao bookBorrowDao = new BookBorrowDao();
+
     private IUserDao userDao = new UserDao();
     @Override
     public List<BookBorrowVo> queryBorrowBookLog() throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -50,34 +51,27 @@ public class BookMessageService implements IBookMessageService {
     }
 
     @Override
-    public List<BookBorrowVo> queryBorrowBookLog(BookBorrowVo bookBorrow) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-     BookBorrow newBookBorrow = new BookBorrow();
-     newBookBorrow.setBorrowUserStudentNumber(bookBorrow.getBorrowBookUserVo().getStudentNumber());
-     newBookBorrow.setBorrowBookTime(bookBorrow.getBorrowBookTime());
-     newBookBorrow.setReturnBookTime(bookBorrow.getReturnBookTime());
-     newBookBorrow.setUserStudentNumber(bookBorrow.getBookUserVo().getStudentNumber());
-        List<BookBorrow> bookBorrows = bookMessageDao.queryBorrowBookLog(newBookBorrow);
+    public List<BookBorrowVo> queryBorrowBookByName(String bookName) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        List<BookBorrow> bookBorrows = bookMessageDao.queryBorrowBookByName(bookName);
         List<BookBorrowVo> bookBorrowVos = new ArrayList<>();
         for (int i = 0; i < bookBorrows.size(); i++) {
-            BookBorrowVo bookBorrowVo = new BookBorrowVo();
-            Integer userStudentNumber = bookBorrows.get(i).getUserStudentNumber();
-            User userUser = userDao.queryUserByStudentNumber(userStudentNumber);
-            UserVo userVo = userChangeUserVo(userUser);
-            bookBorrowVo.setBookUserVo(userVo);
-            Integer borrowUserStudentNumber = bookBorrows.get(i).getBorrowUserStudentNumber();
-            User userBorrow = userDao.queryUserByStudentNumber(borrowUserStudentNumber);
-            UserVo userVo1 = userChangeUserVo(userBorrow);
-            bookBorrowVo.setBorrowBookUserVo(userVo1);
-            Book book = bookMessageDao.queryBookById(bookBorrows.get(i).getBookId());
-            bookBorrowVo.setBookName(book.getBookName());
-            bookBorrowVo.setBookStatus(book.getBookStatus());
-            bookBorrowVo.setBookPrice(book.getBookPrice());
-            bookBorrowVo.setBorrowBookTime(bookBorrows.get(i).getBorrowBookTime());
-            bookBorrowVo.setReturnBookTime(bookBorrows.get(i).getReturnBookTime());
+             BookMessageService bookMessageService = new BookMessageService();
+            BookBorrowVo bookBorrowVo = bookMessageService.bookBorrowChangeBookBorrowVo(bookBorrows.get(i));
             bookBorrowVos.add(bookBorrowVo);
         }
         return bookBorrowVos;
+    }
 
+    @Override
+    public List<BookBorrowVo> queryBorrowBookByUserid(Integer userStudentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        List<BookBorrowVo> bookBorrowVos = new ArrayList<>();
+        BookMessageService bookMessageService = new BookMessageService();
+        List<BookBorrow> bookBorrows = bookMessageDao.queryBorrowBookByUserid(userStudentNumber);
+        for (int i = 0; i < bookBorrows.size(); i++) {
+            BookBorrowVo bookBorrowVo = bookMessageService.bookBorrowChangeBookBorrowVo(bookBorrows.get(i));
+            bookBorrowVos.add(bookBorrowVo);
+        }
+        return bookBorrowVos;
     }
 
     @Override
@@ -172,5 +166,23 @@ public class BookMessageService implements IBookMessageService {
             String duty = userDao.queryIdRole(user.getRoleId());
             userVo.setDuty(duty);
         return userVo;
+    }
+    public BookBorrowVo bookBorrowChangeBookBorrowVo(BookBorrow bookBorrow) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        BookBorrowVo bookBorrowVo = new BookBorrowVo();
+        Integer userStudentNumber = bookBorrow.getUserStudentNumber();
+        User userUser = userDao.queryUserByStudentNumber(userStudentNumber);
+        UserVo userVo = userChangeUserVo(userUser);
+        bookBorrowVo.setBookUserVo(userVo);
+        Integer borrowUserStudentNumber = bookBorrow.getBorrowUserStudentNumber();
+        User userBorrow = userDao.queryUserByStudentNumber(borrowUserStudentNumber);
+        UserVo userVo1 = userChangeUserVo(userBorrow);
+        bookBorrowVo.setBorrowBookUserVo(userVo1);
+        Book book = bookMessageDao.queryBookById(bookBorrow.getBookId());
+        bookBorrowVo.setBookName(book.getBookName());
+        bookBorrowVo.setBookStatus(book.getBookStatus());
+        bookBorrowVo.setBookPrice(book.getBookPrice());
+        bookBorrowVo.setBorrowBookTime(bookBorrow.getBorrowBookTime());
+        bookBorrowVo.setReturnBookTime(bookBorrow.getReturnBookTime());
+        return bookBorrowVo;
     }
 }

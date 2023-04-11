@@ -6,10 +6,11 @@ import tyut.selab.desktop.moudle.book.bookservice.impl.BookBorrowService;
 import tyut.selab.desktop.moudle.book.domain.vo.BookBorrowVo;
 import tyut.selab.desktop.moudle.book.domain.vo.BookVo;
 
+import java.sql.SQLException;
+
 public class BookBorrowController implements IBookBorrowController {
 
     private IBookBorrowService bookBorrowService = new BookBorrowService();
-
     @Override
     public BookBorrowVo borrowBook(BookVo book) {
         BookBorrowVo bookBorrowVo = bookBorrowService.borrowBook(book);
@@ -17,7 +18,8 @@ public class BookBorrowController implements IBookBorrowController {
     }
 
     @Override
-    public BookVo returnBook(BookBorrowVo book) {
-        return null;
+    public BookVo returnBook(BookBorrowVo book) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        BookVo bookVo = bookBorrowService.returnBook(book);
+        return bookVo;
     }
 }

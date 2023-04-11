@@ -3,6 +3,8 @@ package tyut.selab.desktop.moudle.book.bookcontroller;
 import tyut.selab.desktop.moudle.book.domain.vo.BookBorrowVo;
 import tyut.selab.desktop.moudle.book.domain.vo.BookVo;
 
+import java.sql.SQLException;
+
 public interface IBookBorrowController {
     /**
      * 借书
@@ -16,5 +18,5 @@ public interface IBookBorrowController {
      * @param book
      * @return 成功返回1,失败返回-1
      */
-    BookVo returnBook(BookBorrowVo book);
+    BookVo returnBook(BookBorrowVo book) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 }

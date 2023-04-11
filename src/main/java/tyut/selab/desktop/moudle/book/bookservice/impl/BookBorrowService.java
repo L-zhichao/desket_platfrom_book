@@ -22,16 +22,21 @@ public class BookBorrowService implements IBookBorrowService {
 
     private IUserDao userDao;
     @Override
-    public BookBorrowVo borrowBook(BookVo book) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public BookBorrowVo borrowBook(BookBorrowVo book) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Book newBook = new Book();
         newBook.setUserStudentNumber(book.getBookUserVo().getStudentNumber());
         newBook.setBookName(book.getBookName());
         newBook.setBookPrice(book.getBookPrice());
         newBook.setBookStatus(book.getBookStatus());
         int flag = bookMessageDao.updateBookStatus(Book.LENDED, newBook);
+        Book willBorrowBook = bookMessageDao.queryAsBook(book.getBookUserVo().getStudentNumber(), book.getBookName());
         BookBorrow bookBorrow = new BookBorrow();
-        bookBorrow.setBorrowBookTime();
-        bookBorrowDao.insertBorrowBookMessage()
+        bookBorrow.setBorrowBookTime(book.getBorrowBookTime());
+        bookBorrow.setReturnBookTime(book.getReturnBookTime());
+        bookBorrow.setBookId(willBorrowBook.getBookId());
+        bookBorrow.setUserStudentNumber(willBorrowBook.getUserStudentNumber());
+        bookBorrow.setBorrowUserStudentNumber(book.getBorrowBookUserVo().getStudentNumber());
+        int flag1 = bookBorrowDao.insertBorrowBookMessage(bookBorrow);
         Book bookAsBorrow = bookMessageDao.queryAsBook(book.getBookUserVo().getStudentNumber(), book.getBookName());
         BookBorrow bookBorrow = bookMessageDao.queryBorrowBookById(bookAsBorrow.getBookId());
           BookBorrowVo bookBorrowVo = new BookBorrowVo();
@@ -41,7 +46,13 @@ public class BookBorrowService implements IBookBorrowService {
     }
 
     @Override
-    public BookVo returnBook(BookBorrowVo book) {
-        return null;
+    public BookVo returnBook(BookBorrowVo book) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        Book newBook = bookMessageDao.queryAsBook(book.getBookUserVo().getStudentNumber(), book.getBookName());
+        BookBorrow bookBorrow = new BookBorrow();
+        bookBorrow.setBookId(newBook.getBookId());
+        int flag = bookBorrowDao.deleteBorrowBook(bookBorrow);
+        int flag1 = bookMessageDao.updateBookStatus(Book.LENDABLE, newBook);
+
+        return ;
     }
 }

@@ -14,11 +14,18 @@ public interface IBookMessageService {
     List<BookBorrowVo> queryBorrowBookLog() throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
     /**
-     * 根据书/书的拥有者学号来查询名借书记录
-     * @param bookBorrow
+     * 根据书名来查询名借书记录
+     * @param bookName
      * @return
      */
-    List<BookBorrowVo> queryBorrowBookLog(BookBorrowVo bookBorrow) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+    List<BookBorrowVo> queryBorrowBookByName(String bookName) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+
+    /**
+     * 根据拥有者学号来查询名借书记录
+     * @param userStudentNumber
+     * @return
+     */
+    List<BookBorrowVo> queryBorrowBookByUserid(Integer userStudentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
     /**
      * 查询全部图书

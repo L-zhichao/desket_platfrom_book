@@ -23,14 +23,14 @@ public interface IBookMessageDao {
      * @param bookBorrow
      * @return
      */
-    List<BookBorrow> queryBorrowBookLog(String bookName) throws SQLException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException;
+    List<BookBorrow> queryBorrowBookByName(String bookName) throws SQLException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException;
 
     /**
      * 根据书的拥有者学号来查询借书记录
      * @param studentNumber
      * @return
      */
-    List<BookBorrow> queryBorrowBookLog(Integer studentNumber) throws SQLException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException;
+    List<BookBorrow> queryBorrowBookByUserid(Integer studentNumber) throws SQLException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException;
 
    /**
      * 查询全部图书
