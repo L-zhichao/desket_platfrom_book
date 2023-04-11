@@ -43,6 +43,11 @@ public class UserDao implements IUserDao {
     }
 
     @Override
+    public String queryIdRole(Integer roleId) {
+        return null;
+    }
+
+    @Override
     public int insertRole(Role role) {
         return 0;
     }

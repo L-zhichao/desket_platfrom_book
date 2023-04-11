@@ -53,13 +53,12 @@ public interface IUserDao {
      * @return
      */
     List<Role> queryAllRole();
-    
+
     /**
      *  通过Id查询指定职责
-     *@return
      */
     String  queryIdRole(Integer roleId);
-    
+
     /**
      * 增加职责
      * @param role

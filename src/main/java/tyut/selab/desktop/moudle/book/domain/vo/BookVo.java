@@ -10,4 +10,36 @@ public class BookVo {
     private String BookName;
     private int bookStatus;
     private Double bookPrice;
+
+    public UserVo getBookUserVo() {
+        return bookUserVo;
+    }
+
+    public void setBookUserVo(UserVo bookUserVo) {
+        this.bookUserVo = bookUserVo;
+    }
+
+    public String getBookName() {
+        return BookName;
+    }
+
+    public void setBookName(String bookName) {
+        BookName = bookName;
+    }
+
+    public int getBookStatus() {
+        return bookStatus;
+    }
+
+    public void setBookStatus(int bookStatus) {
+        this.bookStatus = bookStatus;
+    }
+
+    public Double getBookPrice() {
+        return bookPrice;
+    }
+
+    public void setBookPrice(Double bookPrice) {
+        this.bookPrice = bookPrice;
+    }
 }
