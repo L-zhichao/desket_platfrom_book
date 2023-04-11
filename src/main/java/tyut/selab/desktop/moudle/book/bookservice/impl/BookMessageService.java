@@ -2,7 +2,6 @@ package tyut.selab.desktop.moudle.book.bookservice.impl;
 
 import tyut.selab.desktop.moudle.book.bookdao.IBookMessageDao;
 import tyut.selab.desktop.moudle.book.bookservice.IBookMessageService;
-import tyut.selab.desktop.moudle.book.domain.vo.BookBorrowVo;
 import tyut.selab.desktop.moudle.book.domain.vo.BookVo;
 import tyut.selab.desktop.moudle.student.userdao.IUserDao;
 
@@ -14,20 +13,24 @@ public class BookMessageService implements IBookMessageService {
     private IUserDao userDao;
 
     @Override
-    public List<BookBorrowVo> queryBorrowBookLog() {
+    public List<BookVo> queryBorrowBookLog() {
         return null;
     }
 
     @Override
-    public List<BookBorrowVo> queryBorrowBookLog(String bookName) {
+    public BookVo queryBorrowBookLog(String bookName, Integer userStudentNumber) {
         return null;
     }
 
     @Override
-    public List<BookBorrowVo> queryBorrowBookLog(Integer userStudentNumber) {
+    public List<BookVo> queryBorrowBookLog(String bookName) {
         return null;
     }
 
+    @Override
+    public List<BookVo> queryBorrowBookLog(Integer studentNumber) {
+        return null;
+    }
 
     @Override
     public List<BookVo> queryAllBook() {

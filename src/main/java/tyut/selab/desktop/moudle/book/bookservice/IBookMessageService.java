@@ -1,6 +1,5 @@
 package tyut.selab.desktop.moudle.book.bookservice;
 
-import tyut.selab.desktop.moudle.book.domain.vo.BookBorrowVo;
 import tyut.selab.desktop.moudle.book.domain.vo.BookVo;
 
 import java.util.List;
@@ -9,22 +8,35 @@ public interface IBookMessageService {
     /**
      * 查询借书记录
      * @return
+     * 管理员
      */
-    List<BookBorrowVo> queryBorrowBookLog();
+    List<BookVo> queryBorrowBookLog();
+
+    /**
+     * 查询某本书的借书记录
+     * @param bookName
+     * @param userStudentNumber
+     * @return
+     * 管理员
+     */
+    BookVo queryBorrowBookLog(String bookName,Integer userStudentNumber);
 
     /**
      * 根据书名来查询借书记录
      * @param bookName
      * @return
+     * 管理员
      */
-    List<BookBorrowVo> queryBorrowBookLog(String bookName);
+    List<BookVo> queryBorrowBookLog(String bookName);
 
     /**
      * 根据学号来查询借书记录
-     * @param userStudentNumber
+     * @param studentNumber
      * @return
+     * 管理员
      */
-    List<BookBorrowVo> queryBorrowBookLog(Integer userStudentNumber);
+    List<BookVo> queryBorrowBookLog(Integer studentNumber);
+
     /**
      * 查询全部图书
      * @return 图书列表
