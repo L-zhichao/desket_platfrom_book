@@ -1,8 +1,8 @@
 package tyut.selab.desktop.moudle.book.bookservice;
 
-import tyut.selab.desktop.moudle.book.domain.vo.BookBorrowVo;
 import tyut.selab.desktop.moudle.book.domain.vo.BookVo;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface IBookMessageService {
@@ -11,16 +11,16 @@ public interface IBookMessageService {
      * @return
      * 管理员
      */
-    List<BookVo> queryBorrowBookLog();
+    List<BookVo> queryBorrowBookLog() throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
     /**
      * 查询某本书的借书记录
+     *
      * @param bookName
      * @param userStudentNumber
-     * @return
-     * 管理员
+     * @return 管理员
      */
-    BookVo queryBorrowBookLog(String bookName,Integer userStudentNumber);
+  BookVo queryBorrowBookLog(String bookName, Integer userStudentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
     /**
      * 根据书名来查询借书记录
@@ -28,7 +28,7 @@ public interface IBookMessageService {
      * @return
      * 管理员
      */
-    List<BookVo> queryBorrowBookLog(String bookName);
+    List<BookVo> queryBorrowBookLog(String bookName) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
     /**
      * 根据学号来查询借书记录
@@ -36,13 +36,13 @@ public interface IBookMessageService {
      * @return
      * 管理员
      */
-    List<BookVo> queryBorrowBookLog(Integer studentNumber);
+    List<BookVo> queryBorrowBookLog(Integer studentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
     /**
      * 查询全部图书
      * @return 图书列表
      */
-    List<BookVo> queryAllBook() throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+    List<BookVo> queryAllBook() throws NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException;
 
     /**
      * 通过图书名字查询图书

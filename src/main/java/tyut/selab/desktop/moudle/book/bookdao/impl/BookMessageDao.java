@@ -22,7 +22,7 @@ public class BookMessageDao implements IBookMessageDao{
     }
 
    @Override
-   public List<BookBorrow> queryBorrowBookLog(Integer studentNumber) throws SQLException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
+   public List<BookBorrow> queryBorrowBookLog(Integer studentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
        List<Book> books = bookMessageDao.queryBookByUserid(studentNumber);
        List<BookBorrow> bookBorrows = new ArrayList<>();
        for (int i = 0; i < books.size(); i++) {
@@ -62,20 +62,19 @@ public class BookMessageDao implements IBookMessageDao{
 
 
     @Override
-    public List<Book> queryBookByUserid(Integer userStudentNumber) throws SQLException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
+    public List<Book> queryBookByUserid(Integer userStudentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String sql = "SELECT * FROM user_book WHERE user_student_number = ?;";
         List<Book> books = connection.executeQuery(Book.class, sql, userStudentNumber);
         return books;
     }
-
+    @Override
     public Book queryAsBook(Integer userStudentNumber, String bookName) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String sql = "SELECT * FROM user_book WHERE user_student_number = ? AND book_name = ?;";
         List<Book> books = connection.executeQuery(Book.class,sql,userStudentNumber, bookName);
         return books.get(0);
 
-    @Override
-    public int updateBook(Book newBook, Book oldBook) {
-        return 0;
+
+
     }
     @Override
     public int updateBookStatus(int status, Book book) throws SQLException {
@@ -86,7 +85,7 @@ public class BookMessageDao implements IBookMessageDao{
         }
         return -1;
     }
-
+    @Override
     public int insertBook(Book book) throws SQLException {
         String sql = "INSERET INTO user_book (book_name,user_student_number,book_status,book_price) values (?,?,?,?);";
         int flag = connection.executeUpdate(sql, book.getBookName(), book.getUserStudentNumber(), book.getBookStatus(), book.getBookPrice());
@@ -94,6 +93,13 @@ public class BookMessageDao implements IBookMessageDao{
             return 1;
         }
         return -1;
+    }
+
+    @Override
+    public int updateBook(Book newBook, Book oldBook) throws SQLException {
+        String sql = "UPDATE user_book SET book_price = ?,book_staus = ? WHERE book_id = ?;";
+        int flag = connection.executeUpdate(sql, newBook.getBookPrice(), newBook.getBookStatus(), newBook.getBookId());
+        return flag;
     }
 
     @Override

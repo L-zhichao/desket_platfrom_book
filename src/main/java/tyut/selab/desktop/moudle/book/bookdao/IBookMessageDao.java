@@ -14,7 +14,7 @@ public interface IBookMessageDao {
      * @param bookName
      * @return
      */
-    Book queryAsBook(Integer userStudentNumber,String bookName);
+    Book queryAsBook(Integer userStudentNumber,String bookName) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
     /**
      * 查询借书记录
@@ -34,7 +34,7 @@ public interface IBookMessageDao {
      * @param studentNumber
      * @return
      */
-    List<BookBorrow> queryBorrowBookLog(Integer studentNumber);
+    List<BookBorrow> queryBorrowBookLog(Integer studentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
     /**
      * 查询全部图书
@@ -54,14 +54,14 @@ public interface IBookMessageDao {
      * @param userStudentNumber 用户学号
      * @return 图书列表
      */
-    List<Book> queryBookByUserid(Integer userStudentNumber);
+    List<Book> queryBookByUserid(Integer userStudentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
     /**
      * 增加图书
      * @param book 书
      * @return 成功返回1，失败返回-1
      */
-    int insertBook(Book book);
+    int insertBook(Book book) throws SQLException;
 
     /**
      * 修改图书信息
@@ -69,7 +69,7 @@ public interface IBookMessageDao {
      * @param oldBook
      * @return
      */
-    int updateBook(Book newBook,Book oldBook);
+    int updateBook(Book newBook,Book oldBook) throws SQLException;
 
     /**
      * 通过书名，修改图书状态
@@ -86,4 +86,5 @@ public interface IBookMessageDao {
      * @return 成功返回1，失败返回-1
      */
     int deleteBook(Integer userStudentNumber,String bookName) throws SQLException;
+
 }
